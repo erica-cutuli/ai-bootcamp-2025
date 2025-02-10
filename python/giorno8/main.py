@@ -79,3 +79,40 @@ for row in rows:
 
 
 cur.close()
+
+#BONUS
+
+conn = sqlite3.connect("mybonus.db")
+cur = conn.cursor()
+
+cur.execute(
+    '''
+    CREATE TABLE IF NOT EXISTS students (
+        id INTEGER PRIMARY KEY,
+        first_name TEXT,
+        last_name TEXT,
+        year_of_birth INTEGER,
+        gender TEXT,
+        email TEXT,
+    )''')
+conn.commit()
+
+cur.execute(
+    '''
+    CREATE TABLE IF NOT EXISTS assignments (
+        id INTEGER PRIMARY KEY,
+        id_s INTEGER,
+        date DATE,
+        FOREIGN KEY (id_s) REFERENCES students(id)
+    )''')
+conn.commit()
+
+
+cur.executemany(
+    "INSERT INTO students "
+    "(id, first_name, last_name, year_of_birth, gender, email, assignments) "
+    "VALUES (?, ?, ?, ?, ?, ?, ?)"
+    "ON CONFLICT DO NOTHING", #così se c'è già la riga non la aggiunge
+    data
+)
+conn.commit()
