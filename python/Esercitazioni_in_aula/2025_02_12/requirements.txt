@@ -1,0 +1,11 @@
+#elenco dei pacchetti richiesti, con l'eventuale versione
+#per fare in modo di installare bisogna eseguire "pip install -r requirements.txt"
+
+jupyter
+pandas==2.2.3
+matplotlib
+seaborn
+
+#se usiamo "pip freeze" otteniamo l'elenco completo ed esatto dei pacchetti scaricati
+#possiamo salvarli con "pip freeze > requirements2.txt"
+
